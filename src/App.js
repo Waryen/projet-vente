@@ -28,8 +28,8 @@ function App() {
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/une' component={UnePage} />
+        <Route path="/detail/:refArticle" component={AutrePage} />
       </Switch>
-      <Route path="/detail/:refArticle" component={AutrePage} />
     </div>
   );
 }
