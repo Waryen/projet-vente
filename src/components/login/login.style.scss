@@ -1,0 +1,14 @@
+.login {
+    width: 380px;
+    display:flex;
+    flex-direction: column;
+
+    .titre {
+        margin: 10px 0;
+    }
+
+    .bouttons {
+        display: flex;
+        justify-content: space-between;
+    }
+}
