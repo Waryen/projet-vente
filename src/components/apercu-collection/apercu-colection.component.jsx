@@ -1,4 +1,5 @@
 import React from 'react';
+import CollectionItem from '../collection-item/collection-item.component'
 import './apercu-collection.style.scss'
 
 const ApercuCollection = ({ titre, items}) => (
@@ -6,10 +7,9 @@ const ApercuCollection = ({ titre, items}) => (
         <h1 className='titre'>{titre.toUpperCase()}</h1>
         <div className='apercu'>
             {
-                items.map(item => (
-                    <div key={item.id}> {item.nom}</div>
-                ))
-            }
+                items.filter((item, idx) => idx < 4).map(({id, ...otherItemPorps}) => (
+                <CollectionItem key={id} {...otherItemPorps}/>
+            ))}
         </div>
     </div>
 )
