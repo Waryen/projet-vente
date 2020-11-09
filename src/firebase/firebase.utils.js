@@ -13,10 +13,41 @@ const config = {
     measurementId: "G-2JR2CM9FLK"
 }
 
+export const creerUserProfilDocument = async (userAuth, autreData) => {
+    if (!userAuth) return // on quitte si pas de connexion ( null )
+    const userRef = firestore.doc('users/WwVEyvVEJccXV4xHnX5e4QIQwdF3')
+    const capture = await userRef.get()
+
+    if (!capture.exists) {
+        const { displayName, email } = userAuth
+        const createAt = new Date()
+        try {
+          await userRef.set({
+            displayName,
+            email,
+            createAt,
+            ...autreData
+          })
+        } catch (error) {
+          console.log("Erreur a la création utilisateur",error.message )
+        }
+      }
+
+      return userRef
+
+    //console.log(capture)
+}
+
 firebase.initializeApp(config)
 
 export const auth = firebase.auth()
 export const firestore = firebase.firestore()
+// un document d'une collection
+firestore.collection('users').doc('2IeZ1w8hkvfT2I2KXR1n').collection('carteElements').doc('cpRcqWiOYEPi1D7VvRKm')
+// ou
+firestore.doc('users/2IeZ1w8hkvfT2I2KXR1n/carteElements/cpRcqWiOYEPi1D7VvRKm')
+// et une collection complet :
+firestore.collection('users/2IeZ1w8hkvfT2I2KXR1n/carteElements')
 
 const provider = new firebase.auth.GoogleAuthProvider()
 provider.setCustomParameters({ prompt: 'select_account' })
